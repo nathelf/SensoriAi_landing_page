@@ -1,0 +1,25 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "devCommand": "npm run dev:vite",
+  "installCommand": "npm install",
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    }
+  ],
+  "functions": {
+    "api/openrouter/chat.js": {
+      "maxDuration": 30
+    },
+    "api/openrouter/stream.js": {
+      "maxDuration": 60
+    },
+    "api/contact.js": {
+      "maxDuration": 30
+    }
+  }
+}
+
