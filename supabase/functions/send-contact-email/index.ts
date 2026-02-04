@@ -121,8 +121,7 @@ const handler = async (req: Request): Promise<Response> => {
               </div>
               
               <p style="color: #4b5563; line-height: 1.6;">
-                Enquanto isso, você pode conhecer mais sobre nossa plataforma em 
-                <a href="https://sensoriai-agro-insight.lovable.app" style="color: #10b981; text-decoration: none;">nosso site</a>.
+                Enquanto isso, você pode conhecer mais sobre nossa plataforma em nosso site.
               </p>
             </div>
             

@@ -5,23 +5,23 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-async function callLovableAI(apiKey: string, messages: any[]) {
-  const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
+async function callOpenRouterAI(apiKey: string, messages: any[]) {
+  const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'openai/gpt-5-mini',
+      model: 'gpt-4o-mini',
       messages,
     }),
   });
 
   if (!response.ok) {
     const errorText = await response.text();
-    console.error('Lovable AI Gateway error:', response.status, errorText);
-    throw new Error(`Lovable AI error: ${response.status}`);
+    console.error('AI Gateway error:', response.status, errorText);
+    throw new Error(`AI error: ${response.status}`);
   }
 
   const data = await response.json();
@@ -38,11 +38,11 @@ serve(async (req) => {
     
     console.log('Generating AI report for:', { period, sectors });
 
-    // Use Lovable AI Gateway to generate intelligent report analysis
-    const lovableApiKey = Deno.env.get('LOVABLE_API_KEY');
+    // Use OpenRouter API to generate intelligent report analysis
+    const openRouterApiKey = Deno.env.get('OPENROUTER_API_KEY');
     
-    if (!lovableApiKey) {
-      throw new Error('LOVABLE_API_KEY not configured');
+    if (!openRouterApiKey) {
+      throw new Error('OPENROUTER_API_KEY not configured');
     }
 
     // Primeira IA: Gera relatório técnico detalhado
@@ -91,7 +91,7 @@ Use terminologia técnica precisa, cite índices agronômicos relevantes e seja 
     console.log('Gerando relatório técnico com GPT...');
     
     // Primeira IA: Gera relatório técnico completo
-    const technicalReport = await callLovableAI(lovableApiKey, [
+    const technicalReport = await callOpenRouterAI(openRouterApiKey, [
       { 
         role: 'user', 
         content: technicalPrompt 
@@ -136,7 +136,7 @@ REGRAS IMPORTANTES:
 - Use bullets e emojis para facilitar leitura
 - Máximo 300 palavras no total`;
 
-    const simplifiedSummary = await callLovableAI(lovableApiKey, [
+    const simplifiedSummary = await callOpenRouterAI(openRouterApiKey, [
       { 
         role: 'user', 
         content: summaryPrompt 
